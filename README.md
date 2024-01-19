@@ -13,7 +13,7 @@ Siga cada passo cuidadosamente para garantir uma execução plena do projeto.
 
 + Pré-requisitos: 
 - Antes de começar, certifique-se de ter instalado o pip com o seguinte comando:
-    ```json
+    ```
     pip install
     ```
 
