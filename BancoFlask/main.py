@@ -1,42 +1,56 @@
+# Importando a biblioteca Flask
 from flask import *
+
+# Importando a classe ContaCorrente do módulo Objetos.ContaCorrente
 from Objetos.ContaCorrente import ContaCorrente
 
+# Criando a aplicação Flask
 webApp = Flask(__name__)
+
+# Definindo a chave secreta para a sessão da aplicação
 webApp.secret_key = 'UFAPE'
 
+# Criando duas instâncias da classe ContaCorrente
 conta1 = ContaCorrente("Matheus", 1234, 1000, 5000, "teus", "adm")
 conta2 = ContaCorrente("Mayara", 12345, 5000, 10000, "12345", "user")
 
+# Criando uma lista de contas
 listaContas = [conta1, conta2]
 
+# Função que retorna a conta do usuário logado
 def contaUsuario():
     for conta in listaContas:
         if conta.titular == session['usuario_logado']:
             return conta
-        
+
+# Função que retorna a conta com o número especificado
 def pegarContaPeloNumero(numero):
     for conta in listaContas:
         if conta.numero == numero:
             return conta
     return None
 
+# Função que verifica se o usuário está logado
 def usuarioLogado() -> bool:
     if session["usuario_logado"] == None or 'usuario_logado' not in session:
         return False
     return True
 
+# Função que verifica se um usuário com o login especificado existe
 def usuarioExiste(login) -> bool:
     for usuario in listaContas:
         if usuario.titular == login:
             return True
     return False
 
+# Função que retorna a conta associada ao login especificado
 def pegarUsuario(login) -> ContaCorrente:
     for usuario in listaContas:
         if usuario.titular == login:
             return usuario
     return None
 
+# Rota que renderiza a página principal se o usuário estiver logado, caso contrário redireciona para a página de login
 @webApp.route("/main")
 def main():
     if usuarioLogado():
@@ -44,10 +58,12 @@ def main():
     else:
         return redirect("/login")
 
+# Rota que renderiza a página de login
 @webApp.route("/")
 def pre_render():
     return render_template("login.html")
 
+# Rota que renderiza a página de status se o usuário estiver logado como usuário comum
 @webApp.route("/status")
 def status():
     if usuarioLogado() and session['nivel'] == 'user':
@@ -55,7 +71,8 @@ def status():
     else:
         flash("Usuário sem permissão!")
         return redirect("/main")
-    
+
+# Rota que renderiza a página de listagem de contas se o usuário estiver logado como administrador
 @webApp.route('/contas')
 def listagemDeContas():
     if usuarioLogado() and session['nivel'] == 'adm':
@@ -64,6 +81,7 @@ def listagemDeContas():
         flash("Usuário sem permissão!")
         return redirect("/main")
 
+# Rota que renderiza a página de criação de conta se o usuário estiver logado como administrador
 @webApp.route("/criarConta")
 def criarConta():
     if usuarioLogado() and session['nivel'] == 'adm':
@@ -72,6 +90,7 @@ def criarConta():
         flash("Usuário sem permissão!")
         return redirect("/main")
 
+# Rota que cadastra uma nova conta com os dados fornecidos
 @webApp.route("/cadastrarConta", methods=["POST", ])
 def cadastrarConta():
     titular = request.form["titular"]
@@ -86,15 +105,18 @@ def cadastrarConta():
 
     return redirect("/contas")
 
+# Rota que exclui uma conta com o índice fornecido na URL
 @webApp.route('/excluir/<int:index>')
 def excluirConta(index):
     listaContas.pop(index)
     return redirect('/contas')
 
+# Rota que renderiza a página de edição de conta com os dados da conta no índice especificado na URL
 @webApp.route('/editar/<int:index>')
 def telaEditarConta(index):
     return render_template('editarConta.html', titulo="Alterar Conta", conta=listaContas[index], index=index)
 
+# Rota que atualiza os dados de uma conta com base nos dados fornecidos no formulário de edição
 @webApp.route('/update', methods=['POST', ])
 def updateFilme():
     index = int(request.form["index"])
@@ -109,6 +131,7 @@ def updateFilme():
     
     return redirect('/contas')
 
+# Rota que renderiza a página de saque se o usuário estiver logado como usuário comum
 @webApp.route("/saque")
 def saque():
     if usuarioLogado() and session['nivel'] == 'user':
@@ -117,6 +140,7 @@ def saque():
         flash("Usuário sem permissão!")
         return redirect("/main")
     
+# Rota que processa o saque com base nos dados fornecidos no formulário
 @webApp.route("/sacar", methods=["POST", ])
 def sacar():
     numero = int(request.form["numero"])
@@ -144,6 +168,7 @@ def sacar():
     
     return redirect("/saque")
 
+# Rota que renderiza a página de depósito se o usuário estiver logado como usuário comum
 @webApp.route("/deposito")
 def deposito():
     if usuarioLogado() and session['nivel'] == 'user':
@@ -152,6 +177,7 @@ def deposito():
         flash("Usuário sem permissão!")
         return redirect("/main")
 
+# Rota que processa o depósito com base nos dados fornecidos no formulário
 @webApp.route("/depositar", methods=["POST", ])
 def depositar():
     numero = int(request.form["numero"])
@@ -175,6 +201,7 @@ def depositar():
     
     return redirect("/deposito")
 
+# Rota que renderiza a página de transferência se o usuário estiver logado como usuário comum
 @webApp.route("/transferencia")
 def transferencia():
     if usuarioLogado() and session['nivel'] == 'user':
@@ -183,6 +210,7 @@ def transferencia():
         flash("Usuário sem permissão!")
         return redirect("/main")
 
+# Rota que processa a transferência com base nos dados fornecidos no formulário
 @webApp.route("/transferir", methods=["POST", ])
 def transferir():
     numeroOrigem = int(request.form["numeroOrigem"])
@@ -221,6 +249,7 @@ def transferir():
 
     return redirect("/transferencia")
 
+# Rota que exibe a página de acesso se o usuário não estiver logado, caso contrário redireciona para a página principal
 @webApp.route('/login')
 def exibirPaginaAcesso():
     if usuarioLogado() == False:
@@ -229,6 +258,7 @@ def exibirPaginaAcesso():
     else:
         return redirect("/main")
 
+# Rota que autentica o usuário com base nos dados fornecidos no formulário de login
 @webApp.route('/autenticar', methods=['POST', ])
 def autenticarUsuario():
     login = request.form["login"]
@@ -251,9 +281,11 @@ def autenticarUsuario():
 
     return redirect(proximaPagina)
 
+# Rota que realiza o logout do usuário
 @webApp.route('/logout')
 def logout():
     session['usuario_logado'] = None
     return redirect('/login')
 
+# Iniciando a aplicação Flask em modo de depuração
 webApp.run(debug=True)
