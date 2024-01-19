@@ -9,7 +9,7 @@ O seguinte projeto projeto visa utilizar a biblioteca Flask, da linguagem de pro
 <img align="center" alt="Matheusxr77-Flask" height="50" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg" />
 
 ## Como Executar
-    Siga cada passo cuidadosamente para garantir uma execução plena do projeto.
+Siga cada passo cuidadosamente para garantir uma execução plena do projeto.
 
 + Pré-requisitos: 
 - Antes de começar, certifique-se de ter instalado o pip com o seguinte comando:
