@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/singin.css">
+    <title> Login </title>
+</head>
+<body class="text-center">
+    <main class="form-signin">
+        <form method="POST" action="/autenticar">
+            <h1 class="h3 mb-3 fw-normal"> Acesso ao Banco </h1>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="login" name="login" placeholder="name@example.com">
+                <label for="login"> Login </label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                <label for="senha"> Senha </label>
+            </div>
+            <input type="hidden" name="proximaPagina" id="proximaPagina"
+                value="{{proximaPagina or url_for('main')}}">
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Logar</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul id="messages" class="list-unstyled">
+            {% for message in messages %}
+            <li class="alert alert-danger" role="alert"> {{message}} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </main>
+</body>
+</html>

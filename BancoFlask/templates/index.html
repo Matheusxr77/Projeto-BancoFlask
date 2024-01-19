@@ -1,0 +1,14 @@
+{% extends "comum/template.html" %}
+{% block conteudo %}
+
+{% if cargo=="adm" %}
+    <a class="btn btn-primary" href="/contas"> Lista de Contas </a>
+    <a class="btn btn-primary" href="/criarConta"> Cadastrar Contas </a>
+{% elif cargo=="user" %}
+    <a class="btn btn-primary" href="/status"> Status da Conta </a>
+    <a class="btn btn-primary" href="/saque"> Realizar Saque </a>
+    <a class="btn btn-primary" href="/transferencia"> Realizar Transferência </a>
+    <a class="btn btn-primary" href="/deposito"> Realizar Deposito </a>
+{% endif %}
+
+{% endblock %}

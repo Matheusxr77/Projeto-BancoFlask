@@ -1,0 +1,27 @@
+{% extends "comum/template.html" %}
+{% block conteudo %}
+<div class="container">
+    <h1 class="text-center"> Dados da Conta </h1><br>
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col"> Nome do Titular </th>
+                <th scope="col"> Número da Conta </th>
+                <th scope="col"> Saldo Bancário </th>
+                <th scope="col"> Cheque Especial </th>
+                <th scope="col"> Cargo Exercido </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"> {{conta.titular}} </td>
+                <td scope="row"> {{conta.numero}} </td>
+                <td scope="row"> R$ {{conta.saldo}} </td>
+                <td scope="row"> R$ {{conta.chequeEspecial}} </td>
+                <td scope="row"> {{conta.cargo}} </td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/main"> Voltar </a>
+</div>
+{% endblock %}

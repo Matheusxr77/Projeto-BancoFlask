@@ -1,0 +1,17 @@
+{% extends "comum/template.html" %}
+{% block conteudo %}
+<h1 class="text-center"> Deposito para Conta Bancária </h1><hr>
+<form action="/depositar" method="post">
+    <div class="form-floating">
+        <input type="text" class="form-control" name="numero" id="numero" placeholder="Número da Conta" required>
+        <label for="numero"> Número da Conta </label>
+    </div><br>
+    <div class="form-floating">
+        <input type="text" class="form-control" name="valorDeposito" id="valorDeposito" placeholder="Valor do Deposito" required>
+        <label for="valorDeposito"> Valor do Deposito </label>
+    </div><br>
+    <button class="btn btn-primary" type="submit"> Deposito </button>
+    <input type="hidden" name="resultadoDeposito" id="resultadoDeposito" value="{{resultadoDeposito or url_for('depositar')}}">
+    <a class="btn btn-primary" href="/main"> Voltar </a>
+</form>
+{% endblock %}

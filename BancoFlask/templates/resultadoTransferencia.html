@@ -1,0 +1,27 @@
+{% extends "comum/template.html" %}
+{% block conteudo %}
+    {% if resultadoTransferencia %}
+    <div class="container">
+        <h1 class="alert text-center"> Resultados pós-transferencia </h1><br>
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center"> Nome do Titular </th>
+                    <th scope="col" class="text-center"> Número da Conta </th>
+                    <th scope="col" class="text-center"> Saldo Bancário </th>
+                    <th scope="col" class="text-center"> Cheque Especial </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row"> {{conta.numero}} </td>
+                    <td scope="row"> {{conta.numero}} </td>
+                    <td scope="row"> R$ {{conta.saldo}} </td>
+                    <td scope="row"> R$ {{conta.chequeEspecial}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="/main"> Voltar </a>
+    </div>
+    {% endif %}
+{% endblock %}

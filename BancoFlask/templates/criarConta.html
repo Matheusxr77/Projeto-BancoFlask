@@ -1,0 +1,38 @@
+{% extends "comum/template.html" %}
+{% block conteudo %}
+<div class="container">  
+    <h1 class="text-center"> Cadastro de Conta Bancária </h1><hr>
+    <form class="form row g-3 needs-validation" action="/cadastrarConta" method="post">
+        <div class="form-floating col-md-8">
+            <input type="text" class="form-control" name="titular" id="titular" placeholder="Nome do Titular" required>
+            <label for="titular"> Nome do Titular </label>
+        </div><br>
+        <div class="form-floating col-md-4">
+            <input type="number" class="form-control" name="numero" id="numero" placeholder="Número da Conta" required>
+            <label for="numero"> Número da Conta </label>
+        </div><br>
+        <div class="form-floating col-md-6">
+            <input type="number" class="form-control" name="saldo" id="saldo" placeholder="Saldo" required>
+            <label for="saldo"> Saldo </label>
+        </div><br>
+        <div class="form-floating col-md-6">
+            <input type="number" class="form-control" name="chequeEspecial" id="chequeEspecial" placeholder="Cheque Especial" required>
+            <label for="chequeEspecial"> Cheque Especial </label>
+        </div><br>
+        <div class="form-floating col-md-6">
+            <input type="text" class="form-control" name="senha" id="senha" placeholder="Senha" required>
+            <label for="senha"> Senha </label>
+        </div><br>
+        <div class="form-floating col-md-6">
+            <select name="cargo" id="cargo" class="form-select" required>
+                <option value="adm"> Administrador </option>
+                <option value="user"> Usuário </option>
+            </select>
+        </div><br>
+        <div class="text-center">
+            <button class="btn btn-success" type="submit"> Cadastrar </button>
+            <a class="btn btn-primary" href="/main"> Voltar </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

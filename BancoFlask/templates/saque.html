@@ -1,0 +1,17 @@
+{% extends "comum/template.html" %}
+{% block conteudo %}
+<h1 class="text-center"> Saque da Conta Bancária </h1><hr>
+<form action="/sacar" method="post">
+    <div class="form-floating">
+        <input type="text" class="form-control" name="numero" id="numero" placeholder="Número da Conta" required>
+        <label for="numero"> Número da Conta </label>
+    </div><br>
+    <div class="form-floating">
+        <input type="text" class="form-control" name="valorSaque" id="valorSaque" placeholder="Valor do Saque" required>
+        <label for="valorSaque"> Valor do Saque </label>
+    </div><br>
+    <button class="btn btn-primary" type="submit"> Sacar </button>
+    <input type="hidden" name="resultadoSaque" id="resultadoSaque" value="{{resultadoSaque or url_for('sacar')}}">
+    <a class="btn btn-primary" href="/main"> Voltar </a>
+</form>
+{% endblock %}

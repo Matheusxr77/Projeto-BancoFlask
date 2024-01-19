@@ -1,0 +1,25 @@
+{% extends "comum/template.html" %}
+{% block conteudo %}
+<h1 class="text-center"> Transferência da Conta Bancária </h1><hr>
+<form action="/transferir" method="post">
+    <div class="form-floating">
+        <input type="text" class="form-control" name="numeroOrigem" id="numeroOrigem" placeholder="Número da sua Conta" required>
+        <label for="numeroOrigem"> Número da sua Conta </label>
+    </div><br>
+    <div class="form-floating">
+        <input type="text" class="form-control" name="numeroDestino" id="numeroDestino" placeholder="Número da Conta de Destino" required>
+        <label for="numeroDestino"> Número da Conta de Destino </label>
+    </div><br>
+    <div class="form-floating">
+        <input type="text" class="form-control" name="valorTransferencia" id="valorTransferencia" placeholder="Valor do Saque" required>
+        <label for="valorTransferencia"> Valor de Transferência </label>
+    </div><br>
+    <div class="form-floating">
+        <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" required>
+        <label for="senha"> Senha </label>
+    </div><br>
+    <button class="btn btn-primary" type="submit"> Transferir </button>
+    <input type="hidden" name="resultadoTransferencia" id="resultadoTransferencia" value="{{resultadoTransferencia or url_for('transferir')}}">
+    <a class="btn btn-primary" href="/main"> Voltar </a>
+</form>
+{% endblock %}
