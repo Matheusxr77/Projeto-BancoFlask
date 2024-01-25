@@ -1,8 +1,8 @@
 # Importando a biblioteca Flask
 from flask import *
 
-# Importando a classe ContaCorrente do módulo Objetos.ContaCorrente
-from Objetos.ContaCorrente import ContaCorrente
+# Importando a classe ContaCorrente do módulo models.ContaCorrente
+from models.ContaCorrente import ContaCorrente
 
 # Criando a aplicação Flask
 webApp = Flask(__name__)

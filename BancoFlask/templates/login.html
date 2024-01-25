@@ -20,8 +20,7 @@
                 <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
                 <label for="senha"> Senha </label>
             </div>
-            <input type="hidden" name="proximaPagina" id="proximaPagina"
-                value="{{proximaPagina or url_for('main')}}">
+            <input type="hidden" name="proximaPagina" id="proximaPagina" value="{{proximaPagina or url_for('main')}}">
             <button class="w-100 btn btn-lg btn-primary" type="submit">Logar</button>
         </form>
         {% with messages = get_flashed_messages() %}
